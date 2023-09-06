@@ -1,0 +1,16 @@
+# base/frontend/sourcegraph-frontend.Ingress.yaml
+   tls:
+     - hosts:
+         #  Replace 'sourcegraph.example.com' with the real domain that you want to use for your Sourcegraph instance.
+         - jenkins-test-devops.theoremus.com
+       secretName: sourcegraph-tls
+   rules:
+     - http:
+         paths:
+         - path: /
+           backend:
+             serviceName: sourcegraph-frontend
+             servicePort: 30080
+       # Replace 'sourcegraph.example.com' with the real domain that you want to use for your Sourcegraph instance.
+       host: sourcegraph.example.com
+
