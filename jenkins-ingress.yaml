@@ -16,8 +16,9 @@ spec:
               service:
                 name: jenkins
                 port:
-                  number: 8080
-tls:
+                  number: 80
+  tls:
     - hosts:
         - jenkins-test-devops.theoremus.com  # Your DNS host
       secretName: my-tls-secret  # The name of the Secret with your SSL/TLS certificates
+

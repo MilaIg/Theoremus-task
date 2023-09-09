@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jenkins
+  name: jenkins-new  # Change the name to avoid conflicts with the existing Deployment
   namespace: devops-tools
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jenkins
+      app: jenkins  # Update this label to match your Service selector
   template:
     metadata:
       labels:
-        app: jenkins
+        app: jenkins  # Update this label to match your Service selector
     spec:
       securityContext:
-            fsGroup: 1000 
-            runAsUser: 1000
+        fsGroup: 1000
+        runAsUser: 1000
       serviceAccountName: jenkins-admin
       containers:
         - name: jenkins
@@ -39,19 +39,4 @@ spec:
             initialDelaySeconds: 120
             periodSeconds: 10
             timeoutSeconds: 10
-            failureThreshold: 5
-          readinessProbe:
-            httpGet:
-              path: "/login"
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          volumeMounts:
-            - name: jenkins-data
-              mountPath: /var/jenkins_home         
-      volumes:
-        - name: jenkins-data
-          persistentVolumeClaim:
-              claimName: jenkins-pv-claim
+
